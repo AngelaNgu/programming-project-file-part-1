@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    printf("=======================================\n");
+    printf("CENTROIDAL MOI CALCULATOR\n");
+    printf("---------------------------------------\n");
+    printf("INPUT: \n\n");
+
+    char fileinputname[100];
+    char fileoutputname[100];
+
+    FILE *file;
+    FILE *file2;
+    char heading1[100], heading2[100];
+    float  radius;
+
+    printf("Please enter input file name:");
+    gets(fileinputname);
+
+
+    file = fopen(fileinputname, "r");
+
+
+    while(file == NULL){
+        printf("ERROR: Input file not exist... \nPlease re-enter input file name: ");
+        gets(fileinputname);
+        file = fopen(fileinputname, "r");
+    }
+        printf("Please enter output file name: ");
+        gets(fileoutputname);
+        file2 = fopen(fileoutputname,"w");
+
+
+    fscanf(file, "%s %s", heading1,heading2);
+
+    printf("%s %s\n", heading1, heading2);
+    fprintf(file2, "%s %s\n", heading1, heading2);
+
+    while(1){
+        char c = fgetc(file);
+        fscanf(file, "%c %f", &c,&radius);
+        printf("%c %f\n",c,radius);
+        fprintf(file2,"%c %f\n",c,radius);
+
+        if(feof(file))
+            break;
+
+
+    }
+
+    return 0;
+}

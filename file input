@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    printf("=======================================\n");
+    printf("CENTROIDAL MOI CALCULATOR\n");
+    printf("---------------------------------------\n");
+    printf("INPUT: \n\n");
+
+    char fileinputname[100];
+
+    FILE *file;
+
+    printf("Please enter input file name:");
+    gets(fileinputname);
+
+
+    file = fopen(fileinputname, "r");
+
+    while(file == NULL){
+        printf("ERROR: Input file not exist... \nPlease re-enter input file name: ");
+        gets(fileinputname);
+        file = fopen(fileinputname, "r");
+    }
+        printf("Please enter output file name: ");
+
+    return 0;
+}

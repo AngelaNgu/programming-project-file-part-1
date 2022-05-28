@@ -42,8 +42,8 @@ int main()
     while(1){
         char c = fgetc(file);
         fscanf(file, "%c %f", &c,&radius);
-        printf("%c %f\n",c,radius);
-        fprintf(file2,"%c %f\n",c,radius);
+        printf("%c %.3e\n",c,radius);
+        fprintf(file2,"%c %.3e\n",c,radius);
 
         if(feof(file))
             break;
@@ -53,3 +53,4 @@ int main()
 
     return 0;
 }
+

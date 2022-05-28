@@ -33,6 +33,8 @@ int main()
         gets(fileoutputname);
         file2 = fopen(fileoutputname,"w");
 
+    printf("---------------------------------------\n");
+    printf("OUTPUT: \n\n");
 
     fscanf(file, "%s %s", heading1,heading2);
 

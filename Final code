@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<math.h>
+int main()
+{
+
+    printf("=======================================\n");
+    printf("CENTROIDAL MOI CALCULATOR\n");
+    printf("---------------------------------------\n");
+    printf("INPUT: \n\n");
+
+    char fileinputname[100];
+    char fileoutputname[100];
+
+    FILE *file;
+    FILE *file2;
+    char heading1[100], heading2[100];
+    float  radius;
+
+
+    printf("Please enter input file name: ");
+    gets(fileinputname);
+
+
+    file = fopen(fileinputname, "r");
+
+
+    while(file == NULL){
+        printf("ERROR: Input file not exist... \nPlease re-enter input file name: ");
+        gets(fileinputname);
+        file = fopen(fileinputname, "r");
+    }
+        printf("Please enter output file name: ");
+        gets(fileoutputname);
+        file2 = fopen(fileoutputname,"w");
+
+    printf("---------------------------------------\n");
+    printf("OUTPUT: \n\n");
+
+    fscanf(file, "%s %s", heading1,heading2);
+
+    printf("%s %s %s %s\n", heading1, heading2, "MOIx", "MOIy");
+    fprintf(file2, "%s %s %s %s\n", heading1, heading2, "MOIx", "MOIy");
+
+    char c = fgetc(file);
+    while(c != EOF){
+
+        fscanf(file, "%c %f ", &c,&radius);
+
+        switch(c){
+        case 'A':
+            if(radius<=0){
+                printf("%c %.3e %s\n",c,radius,"\"INPUT_ERROR\"");
+                fprintf(file2,"%c %.3e %s\n",c,radius, "\"INPUT_ERROR\"");
+            }else{
+            printf("%c %.3e %.3e %.3e\n",c,radius,((M_PI/4)*radius*radius*radius*radius), ((M_PI/4)*radius*radius*radius*radius));
+            fprintf(file2,"%c %.3e %.3e %.3e\n",c,radius, ((M_PI/4)*radius*radius*radius*radius), ((M_PI/4)*radius*radius*radius*radius));
+            }break;
+        case 'B':
+            if(radius<=0){
+                printf("%c %.3e %s\n",c,radius,"\"INPUT_ERROR\"");
+                fprintf(file2,"%c %.3e %s\n",c,radius, "\"INPUT_ERROR\"");
+            }else{
+                printf("%c %.3e %.3e %.3e\n",c,radius,(((M_PI/8)-(8/(9*M_PI)))*radius*radius*radius*radius), ((M_PI/8)*radius*radius*radius*radius));
+                fprintf(file2,"%c %.3e %.3e %.3e\n",c,radius, (((M_PI/8)-(8/(9*M_PI)))*radius*radius*radius*radius), ((M_PI/8)*radius*radius*radius*radius));
+            }break;
+        case 'C':
+            if(radius<=0){
+                printf("%c %.3e %s\n",c,radius,"\"INPUT_ERROR\"");
+                fprintf(file2,"%c %.3e %s\n",c,radius, "\"INPUT_ERROR\"");
+            }else{
+                printf("%c %.3e %.3e %.3e\n",c,radius,(0.5*((M_PI/8)-(8/(9*M_PI)))*radius*radius*radius*radius), ((M_PI/8)*radius*radius*radius*radius));
+                fprintf(file2,"%c %.3e %.3e %.3e\n",c,radius, (0.5*((M_PI/8)-(8/(9*M_PI)))*radius*radius*radius*radius), ((M_PI/8)*radius*radius*radius*radius));
+            }break;
+        default:
+            printf("%c %.3e %s\n",c,radius,"\"INPUT_ERROR\"");
+            fprintf(file2,"%c %.3e %s\n",c,radius, "\"INPUT_ERROR\"");
+            break;
+
+        }
+
+
+        if(feof(file))
+            break;
+
+
+    }
+
+    return 0;
+}
